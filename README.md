@@ -1,4 +1,4 @@
-# 💰 AWS Cost Tracker App
+# 💰 AWS Cost Tracker App ![AWS](https://img.shields.io/badge/Built%20with-AWS-orange?style=flat&logo=amazonaws)![Project Status](https://img.shields.io/badge/status-in--progress-yellow)
 
 This project helps you track your AWS spending in real time using **AWS Budgets**, **SNS notifications**, and optional **Lambda** integration. It's designed to alert you when your usage exceeds your defined monthly budget, helping you avoid unexpected charges.
 
@@ -64,7 +64,68 @@ You can optionally create a Lambda function that:
 
 *(Optional Lambda code examples can be added in a `/lambda` folder)*
 
+## Optional Lambda Function: Log Monthly AWS Costs
+
+This Lambda function uses Cost Explorer to fetch current month cost and logs it to CloudWatch Logs
+
+    import boto3
+    import datetime
+    import logging
+
+    # Set up logging
+    logger = logging.getLogger()
+    logger.setLevel(logging.INFO)
+
+    # Initialize Cost Explorer client
+    ce = boto3.client('ce')
+
+    def lambda_handler(event, context):
+    today = datetime.date.today()
+    start = today.replace(day=1).isoformat()
+    end = today.isoformat()
+    
+    try:
+        response = ce.get_cost_and_usage(
+            TimePeriod={'Start': start, 'End': end},
+            Granularity='MONTHLY',
+            Metrics=['UnblendedCost']
+        )
+        
+        cost = response['ResultsByTime'][0]['Total']['UnblendedCost']['Amount']
+        currency = response['ResultsByTime'][0]['Total']['UnblendedCost']['Unit']
+        
+        message = f"AWS usage from {start} to {end} is {cost} {currency}"
+        logger.info(message)
+        
+        # Optionally return the value
+        return {
+            'statusCode': 200,
+            'message': message
+        }
+    
+    except Exception as e:
+        logger.error(f"Error retrieving cost: {str(e)}")
+        raise
+## IAM Permissions Required for Lambda:
+Attach this inline policy or add permissions via rol
+
+    {
+      "Version": "2012-10-17",
+     "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": "ce:GetCostAndUsage",
+      "Resource": "*"
+      }
+      ]
+    }
+
+
+## 2. Architecture Diagram
+
 ---
 
-## 📂 Project Structure
+## 👤 Author
 
+*Junior Kalomba*    
+Cloud & Security Enthusiast | Aspiring AWS Cloud Engineer

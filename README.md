@@ -35,7 +35,8 @@ This project helps you track your AWS spending in real time using **AWS Budgets*
    - Protocol: `Email`
    - Endpoint: *Your email address*
 4. Confirm the email subscription from your inbox.
-
+  - You should get something like this
+    ![image alt](https://github.com/Juniorklb/AWS-Cost-Tracker-App/blob/124ffbd8ba08cc04d008d4c715f2fce659188815/images/IMG_6838.jpeg)
 ---
 
 ### Step 2: Create an AWS Budget

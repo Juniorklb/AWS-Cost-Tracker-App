@@ -1,4 +1,4 @@
-# 💰 AWS Cost Tracker App ![AWS](https://img.shields.io/badge/Built%20with-AWS-orange?style=flat&logo=amazonaws)![Project Status](https://img.shields.io/badge/status-in--progress-yellow)
+# 💰 AWS Cost Tracker App ![AWS](https://img.shields.io/badge/Built%20with-AWS-orange?style=flat&logo=amazonaws)![Project Status](https://img.shields.io/badge/status-finished-green)
 
 This project helps you track your AWS spending in real time using **AWS Budgets**, **SNS notifications**, and optional **Lambda** integration. It's designed to alert you when your usage exceeds your defined monthly budget, helping you avoid unexpected charges.
 
@@ -123,8 +123,19 @@ Attach this inline policy or add permissions via rol
 
 
 ## 2. Architecture Diagram
+![image alt](https://github.com/Juniorklb/AWS-Cost-Tracker-App/blob/897a82625d0b0d7d1ccc440daf91d7d66e73450a/images/diagramklb.PNG)
 
 ---
+## Conclusions 
+
+- You've successfully built a practical AWS Cost Tracker App that:
+
+- Monitors your monthly AWS spending using AWS Budgets
+
+- Sends real-time email alerts via SNS when you exceed your threshold
+
+- (Optionally) Uses a Lambda function to automatically fetch and log cost data for better tracking and reporting
+
 
 ## 👤 Author
 
